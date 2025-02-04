@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Funcionários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm_style.css') }}">
+</head>
+<body>
+    <h1>Lista de Funcionários</h1>
+    <a href="{{ url_for('criar_funcionario') }}">Adicionar Novo Funcionário</a>
+    <ul>
+        {% for funcionario in funcionarios %}
+            <li>
+                <h2>{{ funcionario.nome }}</h2>
+                <p>Cargo: {{ funcionario.cargo }}</p>
+                <p>{{ funcionario.apresentacao }}</p>
+                
+                {% if funcionario.foto %}
+                    <img src="{{ url_for('static', filename='img/' + funcionario.foto) }}" alt="{{ funcionario.nome }}" width="100">
+                {% endif %}
+                
+                <a href="{{ url_for('editar_funcionario', id=funcionario.id) }}">Editar</a>
+                <form action="{{ url_for('excluir_funcionario', id=funcionario.id) }}" method="POST" onsubmit="return confirmarExclusao()">
+                    <button type="submit">Excluir</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function confirmarExclusao() {
+            return confirm("Tem certeza de que deseja excluir este funcionário?");
+        }
+    </script>
+    <a href="{{ url_for('admin_menu') }}">Voltar ao Menu Admin</a>
+</body>
+</html>

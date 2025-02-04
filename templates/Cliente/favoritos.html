@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forno di Sogni - Conheça Nossos Funcionários</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_home.css') }}">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Forno di Sogni">
+        </a>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('area_favoritos') }}"><i class="fa fa-heart"></i> Favoritos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('conhecer_funcionarios') }}"><i class="fa fa-users"></i> Nossos Funcionários</a>
+                        </li>
+                        {% if not current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login_cliente') }}"><i class="fa fa-sign-in-alt"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('cadastro_cliente') }}"><i class="fa fa-user-plus"></i> Cadastro</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout_cliente') }}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <h1 class="mb-4" style="margin-top: 50px;">Meus Favoritos</h1>
+
+        {% if favoritos %}
+            <div class="row">
+                {% for favorito in favoritos %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            {% if favorito.prato %}
+                            <a href="{{ url_for('detalhes_prato', prato_id=favorito.prato.id) }}" class="text-decoration-none">
+                                <img src="{{ url_for('static', filename='img/' + favorito.prato.imagem) }}" class="card-img-top" alt="{{ favorito.prato.nome }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ favorito.prato.nome }}</h5>
+                                    <p class="card-text">{{ favorito.prato.descricao }}</p>
+                                    <p class="fw-bold">R$ {{ "{:,.2f}".format(favorito.prato.preco).replace(".", ",") }}</p>
+                                </div>
+                            </a>
+                            {% elif favorito.bebida %}
+                                <a href="{{ url_for('detalhes_bebida', bebida_id=favorito.bebida.id) }}" class="text-decoration-none">
+                                <img src="{{ url_for('static', filename='img/' + favorito.bebida.imagem) }}" class="card-img-top" alt="{{ favorito.bebida.nome }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ favorito.bebida.nome }}</h5>
+                                    <p class="card-text">{{ favorito.bebida.descricao }}</p>
+                                    <p class="fw-bold">R$ {{ "{:,.2f}".format(favorito.bebida.preco).replace(".", ",") }}</p>
+                                </div>
+                                </a>
+                            {% endif %}
+                            <div class="card-footer">
+                                <form action="{{ url_for('excluir_favorito', id=favorito.id) }}" method="POST">
+                                    <button class="btn btn-danger">Remover</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">Você ainda não adicionou nenhum item aos favoritos.</p>
+        {% endif %}
+        <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Voltar para o Menu</a>
+    </div>
+    <footer class="mt-5 text-center">
+        <p>Nossos patrocinadores: 
+            <a href="https://instagram.com/espacorf_rosario" target="_blank">
+                <i class="fab fa-instagram"> </i>espacorf_rosario
+            </a> | 
+            <a href="https://instagram.com/patrocinador2" target="_blank">
+                <i class="fab fa-instagram"> </i>patrocinador2
+            </a>
+        </p>
+        <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

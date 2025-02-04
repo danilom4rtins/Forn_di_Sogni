@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forno di Sogni - Conheça Nossos Funcionários</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_home.css') }}">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Forno di Sogni">
+        </a>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('area_favoritos') }}"><i class="fa fa-heart"></i> Favoritos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('conhecer_funcionarios') }}"><i class="fa fa-users"></i> Nossos Funcionários</a>
+                        </li>
+                        {% if not current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login_cliente') }}"><i class="fa fa-sign-in-alt"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('cadastro_cliente') }}"><i class="fa fa-user-plus"></i> Cadastro</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout_cliente') }}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo da Página -->
+    <div class="container mt-5">
+        <h2>Conheça Nossos Funcionários</h2>
+        {% if funcionarios %}
+            <div class="row">
+                {% for funcionario in funcionarios %}
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            {% if funcionario.foto %}
+                                <img src="{{ url_for('static', filename='img/' + funcionario.foto) }}" class="card-img-top" alt="Foto de {{ funcionario.nome }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Foto de {{ funcionario.nome }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ funcionario.nome }}</h5>
+                                <p class="card-text"><strong>Cargo:</strong> {{ funcionario.cargo }}</p>
+                                <p class="card-text"><strong>Apresentação:</strong> {{ funcionario.apresentacao }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Não há funcionários registrados.</p>
+        {% endif %}
+        <h2 style="margin-top: 50px;">Conheça Nossos Patrocinadores</h2>
+        <div id="carouselPatrocinadores" class="carousel slide container mt-5" data-bs-ride="carousel">
+            <center>
+            <div class="carousel-inner">
+                <a href="https://instagram.com/espacorf_rosario" target="_blank">
+                <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='img/patRF.jpg') }}" class="d-block w-50" alt="Patrocinador 1">
+                </div>
+                </a>
+                <a href="https://instagram.com/gustavoreis_vereador" target="_blank">
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='img/patGR.jpg') }}" class="d-block w-50" alt="Patrocinador 2">
+                </div>
+                </a>
+            </div>
+            </center>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselPatrocinadores" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselPatrocinadores" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+    </div>
+    <footer class="mt-5 text-center">
+        <div style="max-width: 600px; margin: auto; text-align: left;">
+            <h3 style="background-color: #a62c2b; color: white; padding-left: 100px; padding-right: 100px; padding-bottom: 2px; padding-top: 2px; text-align: center; margin-bottom: 15px;">O Negócio</h3>
+    
+            <center><h4><strong>Missão:</strong></h4>
+            <p>Oferecer uma explosão de sensações e sabores, proporcionando experiências únicas que despertam os sentidos e criam memórias inesquecíveis a cada mordida.</p>
+    
+            <h4><strong>Visão:</strong></h4>
+            <p>Se tornar referência no mercado bacabeirense por ser reconhecido em fornecer experiências gastronômicas únicas e inovadoras.</p>
+    
+            <h4><strong>Valores:</strong></h4>
+
+            <div class="row">
+                <div class="col-12">
+                <ul style="list-style: none; padding: 0;">
+                    <li>- Transparência</li>
+                    <li>- Foco no cliente</li>
+                    <li>- Sustentabilidade</li>
+                </ul>
+                </div>
+                <div class="col-12"></div>
+                <ul style="list-style: none; padding: 0;">
+                    <li>- Resiliência</li>
+                    <li>- Criatividade</li>
+                    <li>- Ética</li>
+                </ul>
+                </div>
+            </div>
+        </center>
+        </div>
+    
+        <hr> <!-- Linha separadora -->
+    
+        <p>Nossos patrocinadores:  
+            <a href="https://instagram.com/espacorf_rosario" target="_blank"> 
+                <i class="fab fa-instagram"></i> espacorf_rosario 
+            </a> |  
+            <a href="https://instagram.com/gustavoreis_vereador" target="_blank"> 
+                <i class="fab fa-instagram"></i> gustavoreis_vereador 
+            </a> 
+        </p> 
+        <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p> 
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Pratos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm_style.css') }}">    
+</head>
+<body>
+    <h1>Lista de Pratos</h1>
+    <a href="{{ url_for('criar_prato') }}">Adicionar Novo Prato</a>
+    <ul>
+        {% for prato in pratos %}
+            <li>
+                <h2>{{ prato.nome }}</h2>
+                <p>{{ prato.descricao }}</p>
+                <p>Preço: R${{ prato.preco }}</p>
+                
+                {% if prato.imagem %}
+                    <img src="{{ url_for('static', filename='img/' + prato.imagem) }}" alt="{{ prato.nome }}" width="100">
+                {% endif %}
+                
+                <a href="{{ url_for('atualizar_prato', id=prato.id) }}">Editar</a>
+                <form action="{{ url_for('excluir_prato', id=prato.id) }}" method="POST" onsubmit="return confirmarExclusao()">
+                    <button type="submit">Excluir</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function confirmarExclusao() {
+            return confirm("Tem certeza de que deseja excluir este prato?");
+        }
+    </script>
+    <a href="{{ url_for('admin_menu') }}">Voltar ao Menu Admin</a>
+</body>
+</html>

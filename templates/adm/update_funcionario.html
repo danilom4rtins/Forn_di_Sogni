@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm_style.css') }}">
+</head>
+<body>
+    <h1>Editar Funcionário</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ funcionario.nome }}" required>
+        
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" value="{{ funcionario.cargo }}" required>
+        
+        <label for="apresentacao">Apresentação:</label>
+        <textarea id="apresentacao" name="apresentacao">{{ funcionario.apresentacao }}</textarea>
+
+        <label for="foto">Foto (se desejar alterar):</label>
+        <input type="file" id="foto" name="foto" accept="img/*">
+        
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

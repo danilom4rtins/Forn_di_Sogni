@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Prato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm_style.css') }}">
+</head>
+<body>
+    <h1>Adicionar Novo Prato</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao"></textarea>
+        
+        <label for="preco">Preço:</label>
+        <input type="number" step="0.01" id="preco" name="preco" required>
+        
+        <label for="imagem">Imagem:</label>
+        <input type="file" id="imagem" name="imagem" accept="img/*">
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

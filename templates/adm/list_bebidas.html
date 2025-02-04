@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Bebidas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm_style.css') }}">
+</head>
+<body>
+    <h1>Lista de Bebidas</h1>
+    <a href="{{ url_for('criar_bebida') }}">Criar Nova Bebida</a>
+    <ul>
+        {% for bebida in bebidas %}
+        <li>
+            <h2>{{ bebida.nome }}</h2>
+            <p>{{ bebida.descricao }}</p>
+            <p>Preço: R$ {{ bebida.preco }}</p>
+            {% if bebida.imagem %}
+            <img src="{{ url_for('static', filename='img/' + bebida.imagem) }}" alt="{{ bebida.nome }}" width="150">
+            {% endif %}
+            <a href="{{ url_for('editar_bebida', id=bebida.id) }}">Editar</a>
+            <form action="{{ url_for('excluir_bebida', id=bebida.id) }}" method="POST" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('admin_menu') }}">Voltar ao Menu Admin</a>
+</body>
+</html>
