@@ -13,7 +13,7 @@
     <style>
         /* Corrigindo bordas dos itens do menu de navegação */
         #navbarNav .nav-item {
-            border: none !important;  /* Garantindo que não tenha borda */
+            border: none !important;
         }
 
         #navbarNav .nav-link {
@@ -30,7 +30,7 @@
         /* Para o estado de hover, garantir transparência também */
         #navbarNav .nav-link:hover {
             background-color: #ce2b37;
-            color: white;  /* Cor do link no hover */
+            color: white;
         }
 
         /* Garantir que o navbar não tenha borda */
@@ -83,6 +83,16 @@
             <div class="login-form p-4 rounded shadow-sm" style="max-width: 400px; width: 100%; background-color: #fff;">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Restaurante" class="logo mb-3" style="display: block; margin: 0 auto; width: 150px;">
                 <h2 class="text-center mb-4">Login de Cliente</h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert {% if category == 'alert' %}alert-warning{% else %}alert-{{ category }}{% endif %} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="fechar"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 <form method="POST" action="{{ url_for('login_cliente') }}">
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
@@ -102,31 +112,32 @@
         <div style="max-width: 600px; margin: auto; text-align: left;">
             <h3 style="background-color: #a62c2b; color: white; padding-left: 100px; padding-right: 100px; padding-bottom: 2px; padding-top: 2px; text-align: center; margin-bottom: 15px;">O Negócio</h3>
     
-            <center><h4><strong>Missão:</strong></h4>
-            <p>Oferecer uma explosão de sensações e sabores, proporcionando experiências únicas que despertam os sentidos e criam memórias inesquecíveis a cada mordida.</p>
-    
-            <h4><strong>Visão:</strong></h4>
-            <p>Se tornar referência no mercado bacabeirense por ser reconhecido em fornecer experiências gastronômicas únicas e inovadoras.</p>
-    
-            <h4><strong>Valores:</strong></h4>
-
-            <div class="row">
-                <div class="col-12">
-                <ul style="list-style: none; padding: 0;">
-                    <li>- Transparência</li>
-                    <li>- Foco no cliente</li>
-                    <li>- Sustentabilidade</li>
-                </ul>
+            <center>
+                <h4><strong>Missão:</strong></h4>
+                <p>Oferecer uma explosão de sensações e sabores, proporcionando experiências únicas que despertam os sentidos e criam memórias inesquecíveis a cada mordida.</p>
+            
+                <h4><strong>Visão:</strong></h4>
+                <p>Se tornar referência no mercado bacabeirense por ser reconhecido em fornecer experiências gastronômicas únicas e inovadoras.</p>
+            
+                <h4><strong>Valores:</strong></h4>
+            
+                <div class="row justify-content-center text-center">
+                    <div class="col-6 col-md-5">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>- Transparência</li>
+                            <li>- Foco no cliente</li>
+                            <li>- Sustentabilidade</li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-5">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>- Resiliência</li>
+                            <li>- Criatividade</li>
+                            <li>- Ética</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-12"></div>
-                <ul style="list-style: none; padding: 0;">
-                    <li>- Resiliência</li>
-                    <li>- Criatividade</li>
-                    <li>- Ética</li>
-                </ul>
-                </div>
-            </div>
-        </center>
+            </center>            
         </div>
     
         <hr> <!-- Linha separadora -->
@@ -141,7 +152,7 @@
         </p> 
         <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p> 
     </footer>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

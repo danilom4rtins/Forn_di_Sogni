@@ -45,7 +45,7 @@
     </header>
     <div class="container mt-4">
         <h1 class="mb-4" style="margin-top: 50px;">Meus Favoritos</h1>
-
+        
         {% if favoritos %}
             <div class="row">
                 {% for favorito in favoritos %}
@@ -85,15 +85,48 @@
         <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Voltar para o Menu</a>
     </div>
     <footer class="mt-5 text-center">
-        <p>Nossos patrocinadores: 
-            <a href="https://instagram.com/espacorf_rosario" target="_blank">
-                <i class="fab fa-instagram"> </i>espacorf_rosario
-            </a> | 
-            <a href="https://instagram.com/patrocinador2" target="_blank">
-                <i class="fab fa-instagram"> </i>patrocinador2
-            </a>
-        </p>
-        <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p>
+        <div style="max-width: 600px; margin: auto; text-align: left;">
+            <h3 style="background-color: #a62c2b; color: white; padding-left: 100px; padding-right: 100px; padding-bottom: 2px; padding-top: 2px; text-align: center; margin-bottom: 15px;">O Negócio</h3>
+    
+            <center>
+                <h4><strong>Missão:</strong></h4>
+                <p>Oferecer uma explosão de sensações e sabores, proporcionando experiências únicas que despertam os sentidos e criam memórias inesquecíveis a cada mordida.</p>
+            
+                <h4><strong>Visão:</strong></h4>
+                <p>Se tornar referência no mercado bacabeirense por ser reconhecido em fornecer experiências gastronômicas únicas e inovadoras.</p>
+            
+                <h4><strong>Valores:</strong></h4>
+            
+                <div class="row justify-content-center text-center">
+                    <div class="col-6 col-md-5">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>- Transparência</li>
+                            <li>- Foco no cliente</li>
+                            <li>- Sustentabilidade</li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-5">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>- Resiliência</li>
+                            <li>- Criatividade</li>
+                            <li>- Ética</li>
+                        </ul>
+                    </div>
+                </div>
+            </center>            
+        </div>
+    
+        <hr> <!-- Linha separadora -->
+    
+        <p>Nossos patrocinadores:  
+            <a href="https://instagram.com/espacorf_rosario" target="_blank"> 
+                <i class="fab fa-instagram"></i> espacorf_rosario 
+            </a> |  
+            <a href="https://instagram.com/gustavoreis_vereador" target="_blank"> 
+                <i class="fab fa-instagram"></i> gustavoreis_vereador 
+            </a> 
+        </p> 
+        <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p> 
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

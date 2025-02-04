@@ -294,7 +294,8 @@ def login_cliente():
             login_user(cliente)
             return redirect(url_for('home'))  # Redireciona para o menu principal
         else:
-            return "Login ou senha inválidos", 401
+            flash("Login ou senha inválidos", "danger")
+            return redirect(url_for('login_cliente'))
     return render_template('cliente/login.html')
 
 # Relogar usuário
@@ -378,4 +379,4 @@ def excluir_favorito(id):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
