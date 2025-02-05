@@ -60,7 +60,7 @@
     <center>
     <div class="row">
         {% for prato in pratos %}
-        <div class="col-12 col-md mb-4 max-auto " style="margin-left: 4px; margin-right: 4px;">
+        <div class="col-12 col-md-5 mb-4 max-auto " style="margin-left: 4px; margin-right: 4px; text-align: left;">
             <a href="{{ url_for('detalhes_prato', prato_id=prato.id) }}" class="text-decoration-none">
                 <div class="d-flex bg-light p-3 rounded shadow-sm align-items-center">
                     {% if prato.imagem %}
@@ -88,7 +88,7 @@
             <h2 class="mb-4">Bebidas</h2>
             <div class="row">
                 {% for bebida in bebidas %}
-                 <div class="col-12 col-md mb-4 max-auto" style="margin-left: 4px; margin-right: 4px;">
+                 <div class="col-12 col-md-5 mb-4 max-auto" style="margin-left: 4px; margin-right: 4px; text-align: left;">
                     <a href="{{ url_for('detalhes_bebida', bebida_id=bebida.id) }}" class="text-decoration-none">
                         <div class="d-flex bg-light p-3 rounded shadow-sm align-items-center">
                             {% if bebida.imagem %}

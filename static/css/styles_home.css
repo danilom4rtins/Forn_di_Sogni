@@ -134,6 +134,14 @@ footer a{
     background-color: #f8f9fa; /* Cor de fundo dos cards */
 }
 
+#pratos .d-flex,
+#bebidas .d-flex {
+    min-height: 180px; /* Defina um valor adequado */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Alinha o conteúdo no topo */
+}
+
 /* Adicionar bordas entre os cards */
 #pratos .row .col-12,
 #bebidas .row .col-12 {
@@ -141,6 +149,18 @@ footer a{
     padding-left: 0;
     padding-right: 0;
 }
+
+#pratos .d-flex p,
+#bebidas .d-flex p {
+    max-height: 3em;  /* Define um limite de altura */
+    overflow: hidden;  /* Esconde o excesso de texto */
+    text-overflow: ellipsis;  /* Adiciona "..." quando o texto for cortado */
+    white-space: normal;  /* Permite quebras de linha */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    -webkit-box-orient: vertical;
+}
+
 
 /* Remover borda entre os cards no celular */
 @media (max-width: 767px) {
